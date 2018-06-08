@@ -1,7 +1,18 @@
-               #include <windows.h>
+#include <windows.h>
 #include "resource\resource.h"
 #include <commctrl.h>
 #include <stdio.h>
+
+// Common Controls (красивый вид элементов управления)
+#pragma comment(linker, \
+  "\"/manifestdependency:type='Win32' "\
+  "name='Microsoft.Windows.Common-Controls' "\
+  "version='6.0.0.0' "\
+  "processorArchitecture='*' "\
+  "publicKeyToken='6595b64144ccf1df' "\
+  "language='*'\"")
+
+#pragma comment(lib, "ComCtl32.lib")
 
 //==============Global Vatriabls===================
 static HWND hList=NULL;  // List View identifier
