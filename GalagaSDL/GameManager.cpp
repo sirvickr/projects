@@ -8,6 +8,7 @@
 //---------------------------------------------------------------------//
 #include "GameManager.h"
 #include "StartScreen.h"
+#include "BackgroundStars.h"
 #include  <ctime>
 //-----------------------------------------------------------
 // QuickSDL
@@ -57,6 +58,7 @@ namespace QuickSDL {
 		mTimer = Timer::Instance();
 
 		mStartScreen = new StartScreen();
+		mStars = BackgroundStars::Instance();
 	}
 
 	GameManager::~GameManager() {
@@ -76,6 +78,9 @@ namespace QuickSDL {
 		Timer::Release();
 		mTimer = NULL;
 
+		BackgroundStars::Release();
+		mStars = nullptr;
+
 		delete mStartScreen;
 		mStartScreen = NULL;
 	}
@@ -89,6 +94,7 @@ namespace QuickSDL {
 	void GameManager::Update() {
 
 		//GameEntity Updates should happen here
+		mStars->Update();
 		mStartScreen->Update();
 	}
 
@@ -106,6 +112,7 @@ namespace QuickSDL {
 		mGraphics->ClearBackBuffer();
 
 		//All other rendering is to happen here
+		mStars->Render();
 		mStartScreen->Render();
 
 		//Renders the current frame

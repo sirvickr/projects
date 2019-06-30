@@ -3,6 +3,8 @@
 #include "AnimatedTexture.h"
 #include "InputManager.h"
 
+class BackgroundStars;
+
 class StartScreen :
 	public QuickSDL::GameEntity
 {
@@ -49,5 +51,7 @@ private:
 	float mAnimationTotalTime;
 	float mAnimationTimer;
 	bool mAnimationDone;
+
+	BackgroundStars* mStars;
 };
 

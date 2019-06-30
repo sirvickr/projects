@@ -15,6 +15,7 @@
 #include "Timer.h"
 
 class StartScreen;
+class BackgroundStars;
 
 //----------------------------------------------------------------
 // QuickSDL
@@ -48,6 +49,7 @@ namespace QuickSDL {
 		SDL_Event mEvents;
 
 		StartScreen* mStartScreen;
+		BackgroundStars* mStars;
 
 	public:
 		//-----------------------------------------

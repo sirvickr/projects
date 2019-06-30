@@ -1,4 +1,5 @@
 #include "StartScreen.h"
+#include "BackgroundStars.h"
 
 #include <iostream>
 
@@ -77,6 +78,9 @@ StartScreen::StartScreen()
 	mAnimationDone = false;
 
 	Pos(mAnimationStartPos);
+
+	mStars = BackgroundStars::Instance();
+	mStars->Scroll(true);
 }
 
 StartScreen::~StartScreen()
@@ -128,6 +132,7 @@ void StartScreen::Update()
 		Pos(Lerp(mAnimationStartPos, mAnimationEndPos, mAnimationTimer / mAnimationTotalTime));
 		if (mAnimationTimer >= mAnimationTotalTime) {
 			mAnimationDone = true;
+			mStars->Scroll(false);
 		}
 		if (mInput->KeyPressed(SDL_SCANCODE_DOWN) || mInput->KeyPressed(SDL_SCANCODE_UP)) {
 			mAnimationTimer = mAnimationTotalTime;
