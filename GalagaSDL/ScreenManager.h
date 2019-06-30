@@ -6,6 +6,7 @@ namespace QuickSDL {
 
 class BackgroundStars;
 class StartScreen;
+class PlayScreen;
 
 class ScreenManager
 {
@@ -29,6 +30,7 @@ private:
 
 	BackgroundStars* mBackgroundStars;
 	StartScreen* mStartScreen;
+	PlayScreen* mPlayScreen;
 
 	SCREENS mCurrentScreen;
 };

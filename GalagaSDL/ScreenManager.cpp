@@ -2,6 +2,7 @@
 #include "InputManager.h"
 #include "BackgroundStars.h"
 #include "StartScreen.h"
+#include "PlayScreen.h"
 
 using namespace QuickSDL;
 
@@ -24,6 +25,7 @@ ScreenManager::ScreenManager()
 	mInput = InputManager::Instance();
 	mBackgroundStars = BackgroundStars::Instance();
 	mStartScreen = new StartScreen();
+	mPlayScreen = new PlayScreen();
 
 	mCurrentScreen = start;
 }
@@ -37,6 +39,9 @@ ScreenManager::~ScreenManager()
 
 	delete mStartScreen;
 	mStartScreen = nullptr;
+
+	delete mPlayScreen;
+	mPlayScreen = nullptr;
 }
 
 void ScreenManager::Update()
@@ -51,7 +56,7 @@ void ScreenManager::Update()
 		}
 		break;
 	case play:
-		
+		mPlayScreen->Update();
 		if (mInput->KeyPressed(SDL_SCANCODE_ESCAPE)) {
 			mCurrentScreen = start;
 		}
@@ -65,6 +70,9 @@ void ScreenManager::Render()
 	switch (mCurrentScreen) {
 	case start:
 		mStartScreen->Render();
+		break;
+	case play:
+		mPlayScreen->Render();
 		break;
 	}
 }
