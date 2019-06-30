@@ -1,5 +1,6 @@
 #include "StartScreen.h"
 #include "BackgroundStars.h"
+#include "Scoreboard.h"
 
 #include <iostream>
 
@@ -19,23 +20,35 @@ StartScreen::StartScreen()
 	mPlayerOne = new Texture("1UP", "fonts/emulogic.ttf", 32, {200, 0, 0});
 	mHiScore = new Texture("HI-SCORE", "fonts/emulogic.ttf", 32, { 200, 0, 0 });
 	mPlayerTwo = new Texture("2UP", "fonts/emulogic.ttf", 32, { 200, 0, 0 });
+	mPlayerOneScore = new Scoreboard();
+	mTopScore = new Scoreboard();
+	mPlayerTwoScore = new Scoreboard();
 
 	mPlayerOne->Parent(mTopBar);
 	mHiScore->Parent(mTopBar);
 	mPlayerTwo->Parent(mTopBar);
+	mPlayerOneScore->Parent(mTopBar);
+	mTopScore->Parent(mTopBar);
+	mPlayerTwoScore->Parent(mTopBar);
 
 	mPlayerOne->Pos(Vector2(-width * 0.35f, 0.0f));
 	mHiScore->Pos(Vector2(-30.0f, 0.0f));
 	mPlayerTwo->Pos(Vector2(width * 0.2f, 0.0f));
+	mPlayerOneScore->Pos(Vector2(-width * 0.23f, 40.0f));
+	mTopScore->Pos(Vector2(width * 0.05f, 40.0f));
+	mPlayerTwoScore->Pos(Vector2(width * 0.32f, 40.0f));
+
+	mTopScore->Score(30000);
+
 	mTopBar->Parent(this);
 
 	// Logo entities
 	mLogo = new Texture("images/logo.png", 0, 0, 360, 180);
-	mLogo->Pos(Vector2(width * 0.5f, height * 0.3f));
+	mLogo->Pos(Vector2(width * 0.5f, height * 0.32f));
 	mLogo->Parent(this);
 
 	// Play mode entities
-	mPlayerModes = new GameEntity(Vector2(width * 0.5f, height * 0.5f));
+	mPlayerModes = new GameEntity(Vector2(width * 0.5f, height * 0.53f));
 	mOnePlayerMode = new Texture("1 Player", "fonts/emulogic.ttf", 32, { 230, 230, 230 });
 	mTwoPlayerMode = new Texture("2 Players", "fonts/emulogic.ttf", 32, { 230, 230, 230 });
 	mCursor = new Texture("images/cursor.png");
@@ -94,6 +107,12 @@ StartScreen::~StartScreen()
 	mHiScore = NULL;
 	delete mPlayerTwo;
 	mPlayerTwo = NULL;
+	delete mPlayerOneScore;
+	mPlayerOneScore = NULL;
+	delete mTopScore;
+	mTopScore = NULL;
+	delete mPlayerTwoScore;
+	mPlayerTwoScore = NULL;
 
 	delete mLogo;
 	mLogo = NULL;
@@ -142,10 +161,12 @@ void StartScreen::Update()
 
 void StartScreen::Render()
 {
-	mTopBar->Render();
 	mPlayerOne->Render();
 	mHiScore->Render();
 	mPlayerTwo->Render();
+	mPlayerOneScore->Render();
+	mTopScore->Render();
+	mPlayerTwoScore->Render();
 
 	mLogo->Render();
 

@@ -4,6 +4,7 @@
 #include "InputManager.h"
 
 class BackgroundStars;
+class Scoreboard;
 
 class StartScreen :
 	public QuickSDL::GameEntity
@@ -25,6 +26,9 @@ private:
 	QuickSDL::Texture* mPlayerOne;
 	QuickSDL::Texture* mHiScore;
 	QuickSDL::Texture* mPlayerTwo;
+	Scoreboard* mPlayerOneScore;
+	Scoreboard* mTopScore;
+	Scoreboard* mPlayerTwoScore;
 
 	// Logo entities
 	QuickSDL::Texture* mLogo;
