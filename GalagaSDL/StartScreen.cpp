@@ -84,13 +84,7 @@ StartScreen::StartScreen()
 	mBotBar->Parent(this);
 
 	// Screen animation variables
-	mAnimationStartPos = Vector2(0.0f, height);
-	mAnimationEndPos = VEC2_ZERO;
-	mAnimationTotalTime = 5.0f;
-	mAnimationTimer = 0.0f;
-	mAnimationDone = false;
-
-	Pos(mAnimationStartPos);
+	ResetAnmation();
 
 	mStars = BackgroundStars::Instance();
 	mStars->Scroll(true);
@@ -178,6 +172,22 @@ void StartScreen::Render()
 	mNamco->Render();
 	mDates->Render();
 	mRights->Render();
+}
+
+void StartScreen::ResetAnmation()
+{
+	mAnimationStartPos = Vector2(0.0f, Graphics::Instance()->SCREEN_HEIGHT);
+	mAnimationEndPos = VEC2_ZERO;
+	mAnimationTotalTime = 5.0f;
+	mAnimationTimer = 0.0f;
+	mAnimationDone = false;
+
+	Pos(mAnimationStartPos);
+}
+
+int StartScreen::SelectedMode()
+{
+	return mSelectedMode;
 }
 
 void StartScreen::ChangeSelectedMode(int change)

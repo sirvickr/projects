@@ -16,6 +16,8 @@ public:
 	void Update() override;
 	void Render() override;
 
+	void ResetAnmation();
+	int SelectedMode();
 	void ChangeSelectedMode(int change);
 
 private:
