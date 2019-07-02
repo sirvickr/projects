@@ -21,6 +21,7 @@ public:
 
 	void SetHighScore(int score);
 	void SetPlayerOneScore(int score);
+	void SetShips(int value);
 
 private:
 	QuickSDL::Timer* mTimer;
@@ -37,5 +38,11 @@ private:
 	float mBlinkTimer;
 	float mBlinkInterval;
 	bool mPlayerOneLabelVisible;
+
+	static const int MAX_SHIP_TEXTURES = 5;
+	QuickSDL::GameEntity* mShips;
+	QuickSDL::Texture* mShipsTextures[MAX_SHIP_TEXTURES];
+	Scoreboard* mTotalShipsLabel;
+	int mTotalShips;
 };
 

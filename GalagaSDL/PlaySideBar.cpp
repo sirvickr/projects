@@ -39,6 +39,22 @@ PlaySideBar::PlaySideBar()
 	mBlinkTimer = 0.0f;
 	mBlinkInterval = 0.5f;
 	mPlayerOneLabelVisible = true;
+
+	mShips = new GameEntity();
+	mShips->Parent(this);
+	mShips->Pos(Vector2(-40.0f, 450.0f));
+
+	for (int i = 0; i < MAX_SHIP_TEXTURES; ++i) {
+		mShipsTextures[i] = new Texture("images/playership.png");
+		mShipsTextures[i]->Parent(mShips);
+		mShipsTextures[i]->Pos(Vector2(70.0f * (i % 3), 70.0f * (i / 3)));
+	}
+
+	mTotalShipsLabel = new Scoreboard();
+	mTotalShipsLabel->Parent(mShips);
+	mTotalShipsLabel->Pos(Vector2(152.0f, 85.0f));
+
+	mTotalShips = 0;
 }
 
 PlaySideBar::~PlaySideBar()
@@ -60,6 +76,17 @@ PlaySideBar::~PlaySideBar()
 	mPlayerOneLabel = nullptr;
 	delete mPlayerOneScore;
 	mPlayerOneScore = nullptr;
+
+	delete mShips;
+	mShips = nullptr;
+
+	for (int i = 0; i < MAX_SHIP_TEXTURES; ++i) {
+		delete mShipsTextures[i];
+		mShipsTextures[i] = nullptr;
+	}
+
+	delete mTotalShipsLabel;
+	mTotalShipsLabel = nullptr;
 }
 
 void PlaySideBar::Update()
@@ -82,6 +109,14 @@ void PlaySideBar::Render()
 	if(mPlayerOneLabelVisible) {
 		mPlayerOneLabel->Render();
 	}
+
+	for (int i = 0; i < MAX_SHIP_TEXTURES && i < mTotalShips; ++i) {
+		mShipsTextures[i]->Render();
+	}
+
+	if (mTotalShips > MAX_SHIP_TEXTURES) {
+		mTotalShipsLabel->Render();
+	}
 }
 
 void PlaySideBar::SetHighScore(int score)
@@ -92,4 +127,12 @@ void PlaySideBar::SetHighScore(int score)
 void PlaySideBar::SetPlayerOneScore(int score)
 {
 	mPlayerOneScore->Score(score);
+}
+
+void PlaySideBar::SetShips(int value)
+{
+	mTotalShips = value;
+	if (mTotalShips > MAX_SHIP_TEXTURES) {
+		mTotalShipsLabel->Score(mTotalShips);
+	}
 }
